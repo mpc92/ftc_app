@@ -45,15 +45,15 @@ public class secondTest extends LinearOpMode {
 
             double leftPower;
             double rightPower;
-            double leftStick = gamepad1.left_stick_y;
-            double rightStick = gamepad1.right_stick_x;
+            double leftStickY = gamepad1.left_stick_y;
+            double rightStickX = gamepad1.right_stick_x;
 
-            if (rightStick < 0) {
-                leftPower = leftStick + (2 * rightStick);
-                rightPower = leftStick;
-            } else if (rightStick > 0) {
-                leftPower = leftStick;
-                rightPower = leftStick - (2 * rightStick);
+            if (rightStickX < 0) {
+                leftPower = leftStickY + (2 * rightStickX);
+                rightPower = leftStickY;
+            } else if (rightStickX > 0) {
+                leftPower = leftStickY;
+                rightPower = leftStickY - (2 * rightStickX);
             } else {
                 leftPower = 0;
                 rightPower = 0;

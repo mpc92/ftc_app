@@ -31,12 +31,11 @@ public class secondTest extends LinearOpMode {
         runtime.reset();
 
         while(opModeIsActive()){
-            //double is a variable type that supports decimals
-            double leftPower;
-            double rightPower;
+
+            double leftPower; //double is a variable type that supports decimals
+            double rightPower; //defining a variable is just stating the type, and giving it a value, if applicable
             double leftStick = gamepad1.left_stick_y;
             double rightStick = gamepad1.right_stick_x;
-            //defining a variable is just stating the type, and giving it a value, if applicable
 
             if (rightStick < 0) {
                 leftPower = leftStick + (2 * rightStick);
@@ -56,9 +55,7 @@ public class secondTest extends LinearOpMode {
             this.rightMotor.setPower(rightPower);
 
         }
-
     }
-
 
     private void initialize(){
 

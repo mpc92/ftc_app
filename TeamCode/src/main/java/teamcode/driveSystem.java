@@ -56,6 +56,9 @@ public class driveSystem extends LinearOpMode {
            leftStickY = -gamepad1.left_stick_y;
            rightStickX = gamepad1.right_stick_x;
 
+           leftPower = 0;
+           rightPower = 0;
+
             if (leftStickY != 0) { //if driving
 
                 if (rightStickX < 0) {
@@ -79,18 +82,12 @@ public class driveSystem extends LinearOpMode {
 
             else if (leftStickY == 0) { //if the left stick is not pressed, the robot will turn faster
 
-                if (rightStickX < 0) {
-                    leftPower = -rightStickX;
-                    rightPower = rightStickX;
-                    // turn left faster
-                }
+                leftPower = rightStickX;
+                rightPower = -rightStickX;
+                // turn left or right faster!
 
-                else if (rightStickX > 0) {
-                    leftPower = rightStickX;
-                    rightPower = -rightStickX;
-                    // turn right faster
-                }
             }
+
             else { // just in case, the robot will hold still
                 leftPower = 0;
                 rightPower = 0;

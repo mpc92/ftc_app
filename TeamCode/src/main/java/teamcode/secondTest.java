@@ -19,6 +19,7 @@ public class secondTest extends LinearOpMode {
 
     private DcMotor leftMotor;
     private DcMotor rightMotor;
+    private DcMotor testMotor;
 
     @Override
     public void runOpMode() {
@@ -28,6 +29,7 @@ public class secondTest extends LinearOpMode {
         //also initializing the hardware?
         this.leftMotor = hardwareMap.get(DcMotor.class, "Left Motor");
         this.rightMotor = hardwareMap.get(DcMotor.class, "Right Motor");
+        this.testMotor = hardwareMap.get(DcMotor.class, "Test Motor");
 
         // makes the motors that face away from each other move the same direction
         this.leftMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -39,26 +41,56 @@ public class secondTest extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
+        double leftPower = 0;
+        double rightPower = 0;
+        double leftStickY;
+        double rightStickX;
+
+
         //double is a variable type that supports decimals
         //defining a variable is just stating the type, and giving it a value, if applicable
+
         while (opModeIsActive()) {
 
-            double leftPower;
-            double rightPower;
-            double leftStickY = gamepad1.left_stick_y;
-            double rightStickX = gamepad1.right_stick_x;
+           leftStickY = -gamepad1.left_stick_y;
+           rightStickX = gamepad1.right_stick_x;
 
-            if (rightStickX < 0) {
-                leftPower = leftStickY + (2 * rightStickX);
-                rightPower = leftStickY;
-            } else if (rightStickX > 0) {
-                leftPower = leftStickY;
-                rightPower = leftStickY - (2 * rightStickX);
-            } else {
-                leftPower = 0;
-                rightPower = 0;
-                //if neither of these if statements report true it sets the motor powers to 0
-                // if you don't push a stick, the robot don't move
+            if (leftStickY != 0) { //if driving
+
+                if (rightStickX < 0) {
+                    // turn left
+                    leftPower = leftStickY + rightStickX;
+                    rightPower = leftStickY;
+                }
+                else if (rightStickX > 0) {
+                    // turn right
+                    leftPower = leftStickY;
+                    rightPower = leftStickY - rightStickX;
+                }
+                else {
+                    // go straight
+                    leftPower = leftStickY;
+                    rightPower = leftStickY;
+                }
+            }
+
+            else if (leftStickY == 0) { //if holding still
+
+                if (rightStickX < 0) {
+                    leftPower = -leftStickY;
+                    rightPower = leftStickY;
+                    // turn left faster
+                }
+                else if (rightStickX > 0) {
+                    leftPower = leftStickY;
+                    rightPower = -leftStickY;
+                    // turn right faster
+                }
+                else {
+                    // go straight
+                    leftPower = leftStickY;
+                    rightPower = leftStickY;
+                }
             }
 
             this.leftMotor.setPower(leftPower);

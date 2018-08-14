@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 //the name of the Op Mode in the Driver's Station
 @TeleOp(name="JessTest2", group="Linear Opmode")
 
-public class secondTest extends LinearOpMode {
+public class driveSystem extends LinearOpMode {
 
     // declaring hardware
     // variable type, Hardware type, variable name
@@ -27,6 +27,7 @@ public class secondTest extends LinearOpMode {
         //run the initialize block
         //giving internal hardware an external name for the app config
         //also initializing the hardware?
+
         this.leftMotor = hardwareMap.get(DcMotor.class, "Left Motor");
         this.rightMotor = hardwareMap.get(DcMotor.class, "Right Motor");
         this.testMotor = hardwareMap.get(DcMotor.class, "Test Motor");
@@ -62,11 +63,13 @@ public class secondTest extends LinearOpMode {
                     leftPower = leftStickY + rightStickX;
                     rightPower = leftStickY;
                 }
+
                 else if (rightStickX > 0) {
                     // turn right
                     leftPower = leftStickY;
                     rightPower = leftStickY - rightStickX;
                 }
+
                 else {
                     // go straight
                     leftPower = leftStickY;
@@ -74,23 +77,23 @@ public class secondTest extends LinearOpMode {
                 }
             }
 
-            else if (leftStickY == 0) { //if holding still
+            else if (leftStickY == 0) { //if the left stick is not pressed, the robot will turn faster
 
                 if (rightStickX < 0) {
-                    leftPower = -leftStickY;
-                    rightPower = leftStickY;
+                    leftPower = -rightStickX;
+                    rightPower = rightStickX;
                     // turn left faster
                 }
+
                 else if (rightStickX > 0) {
-                    leftPower = leftStickY;
-                    rightPower = -leftStickY;
+                    leftPower = rightStickX;
+                    rightPower = -rightStickX;
                     // turn right faster
                 }
-                else {
-                    // go straight
-                    leftPower = leftStickY;
-                    rightPower = leftStickY;
-                }
+            }
+            else { // just in case, the robot will hold still
+                leftPower = 0;
+                rightPower = 0;
             }
 
             this.leftMotor.setPower(leftPower);

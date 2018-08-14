@@ -19,7 +19,6 @@ public class driveSystem extends LinearOpMode {
 
     private DcMotor leftMotor;
     private DcMotor rightMotor;
-    private DcMotor testMotor;
 
     @Override
     public void runOpMode() {
@@ -30,9 +29,9 @@ public class driveSystem extends LinearOpMode {
 
         this.leftMotor = hardwareMap.get(DcMotor.class, "Left Motor");
         this.rightMotor = hardwareMap.get(DcMotor.class, "Right Motor");
-        this.testMotor = hardwareMap.get(DcMotor.class, "Test Motor");
 
         // makes the motors that face away from each other move the same direction
+
         this.leftMotor.setDirection(DcMotor.Direction.FORWARD);
         this.rightMotor.setDirection(DcMotor.Direction.REVERSE);
 

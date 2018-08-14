@@ -23,7 +23,23 @@ public class followLine1 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        this.leftMotor = hardwareMap.get(DcMotor.class, "Left Motor");
+        this.rightMotor = hardwareMap.get(DcMotor.class, "Right Motor");
+
+        this.armSensor = hardwareMap.get(ColorSensor.class, "Arm Sensor");
+
+        this.armServo = hardwareMap.get(Servo.class, "Arm Sensor");
 
 
+
+
+       while (opModeIsActive()){
+           
+            if (gamepad1.a) {
+
+                telemetry.addData("test", "it worked, bitch");
+
+            }
+        }
     } //public void runOpMode()
 } //public class followLine1 extends LinearOpMode

@@ -20,6 +20,7 @@ public class followLine1 extends LinearOpMode {
 
     private ColorSensor armSensor;
 
+
     @Override
     public void runOpMode() {
 
@@ -28,18 +29,70 @@ public class followLine1 extends LinearOpMode {
 
         this.armSensor = hardwareMap.get(ColorSensor.class, "Arm Sensor");
 
-        this.armServo = hardwareMap.get(Servo.class, "Arm Sensor");
+        this.armServo = hardwareMap.get(Servo.class, "Arm Servo");
 
 
+        waitForStart();
+        runtime.reset();
+
+        double armPostion = 0;
+        double leftPower = 0;
+        double rightPower = 0;
+        double leftStickY;
+        double rightStickX;
+
+        this.armServo.setPosition(-.125);
 
 
        while (opModeIsActive()){
-           
-            if (gamepad1.a) {
 
-                telemetry.addData("test", "it worked, bitch");
+            armPostion = this.armServo.getPosition();
+            leftStickY = -gamepad1.left_stick_y;
+            rightStickX = gamepad1.right_stick_x;
+            leftPower = 0;
+            rightPower = 0;
 
-            }
+               if (leftStickY != 0) { //if driving
+
+                   if (rightStickX < 0) {
+                       // turn left
+                       leftPower = leftStickY + rightStickX;
+                       rightPower = leftStickY;
+                   }
+
+                   else if (rightStickX > 0) {
+                       // turn right
+                       leftPower = leftStickY;
+                       rightPower = leftStickY - rightStickX;
+                   }
+
+                   else {
+                       // go straight
+                       leftPower = leftStickY;
+                       rightPower = leftStickY;
+                   }
+               }
+
+               else if (leftStickY == 0) { //if the left stick is not pressed, the robot will turn faster
+
+                   leftPower = rightStickX;
+                   rightPower = -rightStickX;
+                   // turn left or right faster!
+
+               }
+
+               else { // if the user does not have input, the robot will attempt to follow a line
+
+               }
+
+               this.leftMotor.setPower(leftPower);
+               this.rightMotor.setPower(rightPower);
+
+               telemetry.addData("Left Power", leftPower);
+               telemetry.addData("Right Power", rightPower);
+
+               telemetry.update();
+
         }
     } //public void runOpMode()
 } //public class followLine1 extends LinearOpMode

@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
-@TeleOp (name="Follow Line", group="Linear Opmode")
+@TeleOp (name="Follow Line 1", group="Linear Opmode")
 
 public class followLine1 extends LinearOpMode {
 

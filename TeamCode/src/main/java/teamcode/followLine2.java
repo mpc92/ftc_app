@@ -20,6 +20,8 @@ public class followLine2 extends LinearOpMode {
 
     private ColorSensor armSensor;
 
+    double armPos = 0;
+
     @Override
     public void runOpMode() {
 
@@ -30,7 +32,54 @@ public class followLine2 extends LinearOpMode {
 
         this.armSensor = hardwareMap.get(ColorSensor.class, "Arm Sensor");
 
+        waitForStart();
+        runtime.reset();
 
-    }
+        telemetry.addData("Left Power", this.leftMotor.getPower());
+        telemetry.addData("Right Power", this.rightMotor.getPower());
+        telemetry.addData("Arm Position", this.armServo.getPosition());
+        telemetry.addData("Color Data", this.armSensor.argb());
 
-}
+        while (opModeIsActive()){
+
+            while (gamepad1.right_trigger > 0){
+
+                this.armServo.setPosition(1);
+
+                while (this.armServo.getPosition() > 0){
+
+                    armPos = armPos - 0.01;
+                    this.armServo.setPosition(armPos);
+
+                    if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30)) {
+
+                        this.leftMotor.setPower(.05);
+                        this.rightMotor.setPower(.15);
+                        telemetry.update();
+
+                    }//if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30))
+
+                }//while (this.armServo.getPosition() > 0
+
+                while (this.armServo.getPosition() < 1) {
+
+                    armPos = armPos + 0.01;
+                    this.armServo.setPosition(armPos);
+
+                    if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30)) {
+
+                        this.leftMotor.setPower(.15);
+                        this.rightMotor.setPower(.05);
+                        telemetry.update();
+
+                    }//if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30))
+
+                }//while (this.armServo.getPosition() < 1)
+
+            }//while (gamepad1.right_trigger > 0)
+
+        }//while (opModeIsActive())
+
+    }//public void runOpMode
+
+}//public class followLine2 extends LinearOpMode

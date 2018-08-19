@@ -2,6 +2,7 @@ package teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -31,6 +32,9 @@ public class followLine2 extends LinearOpMode {
         this.armServo = hardwareMap.get(Servo.class, "Arm Servo");
 
         this.armSensor = hardwareMap.get(ColorSensor.class, "Arm Sensor");
+
+        this.leftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
         runtime.reset();
@@ -77,6 +81,9 @@ public class followLine2 extends LinearOpMode {
                 }//while (this.armServo.getPosition() < 1)
 
             }//while (gamepad1.right_trigger > 0)
+
+            this.leftMotor.setPower(0);
+            this.rightMotor.setPower(0);
 
         }//while (opModeIsActive())
 

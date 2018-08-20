@@ -39,14 +39,41 @@ public class followLine2 extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        telemetry.addData("Left Power", this.leftMotor.getPower());
-        telemetry.addData("Right Power", this.rightMotor.getPower());
-        telemetry.addData("Arm Position", this.armServo.getPosition());
-        telemetry.addData("Color Data", this.armSensor.argb());
 
         while (opModeIsActive()){
 
-            while (gamepad1.right_trigger > 0){
+            telemetry.addData("Left Power", this.leftMotor.getPower());
+            telemetry.addData("Right Power", this.rightMotor.getPower());
+            telemetry.addData("Arm Position", this.armServo.getPosition());
+            telemetry.addData("Red", this.armSensor.red());
+            telemetry.addData("Green", this.armSensor.green());
+            telemetry.addData("Blue", this.armSensor.blue());
+
+            telemetry.update();
+
+            if (gamepad1.right_bumper){//manually bump the arm
+
+                armPos = armPos + 0.05;
+                this.armServo.setPosition(armPos);
+                telemetry.update();
+
+            }
+
+            if (gamepad1.left_bumper){//manually bump the arm
+
+                armPos = armPos - 0.05;
+                this.armServo.setPosition(armPos);
+                telemetry.update();
+
+            }
+
+            if (gamepad1.b){//force update telemetry
+
+                telemetry.update();
+
+            }
+
+            while (gamepad1.a){//while a is held the robot should follow a blue line
 
                 this.armServo.setPosition(1);
 
@@ -54,14 +81,35 @@ public class followLine2 extends LinearOpMode {
 
                     armPos = armPos - 0.01;
                     this.armServo.setPosition(armPos);
+                    telemetry.update();
 
-                    if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30)) {
+                    if ((armSensor.blue() > armSensor.green()) && (armSensor.blue() > armSensor.red())){ //if blue is the most prominent color, then the robot will give a slight steer based on where the line is
 
-                        this.leftMotor.setPower(.05);
-                        this.rightMotor.setPower(.15);
-                        telemetry.update();
+                        if (armPos < 0.75){
 
-                    }//if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30))
+                            this.leftMotor.setPower(.1);
+                            this.rightMotor.setPower(.15);
+                            telemetry.update();
+
+                        }
+
+                        if (armPos == 0.75){
+
+                            this.leftMotor.setPower(.1);
+                            this.rightMotor.setPower(.1);
+                            telemetry.update();
+
+                        }
+
+                        if (armPos < 0.75){
+
+                            this.leftMotor.setPower(.15);
+                            this.rightMotor.setPower(.1);
+                            telemetry.update();
+
+                        }
+
+                    }//if ((armSensor.blue() > armSensor.green()) && (armSensor.blue() > armSensor.red()))
 
                 }//while (this.armServo.getPosition() > 0
 
@@ -69,18 +117,39 @@ public class followLine2 extends LinearOpMode {
 
                     armPos = armPos + 0.01;
                     this.armServo.setPosition(armPos);
+                    telemetry.update();
 
-                    if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30)) {
+                    if ((armSensor.blue() > armSensor.green()) && (armSensor.blue() > armSensor.red())){//if blue is the most prominent color, then the robot will give a slight steer based on where the line is
 
-                        this.leftMotor.setPower(.15);
-                        this.rightMotor.setPower(.05);
-                        telemetry.update();
+                        if (armPos < 0.75){
 
-                    }//if (((armSensor.blue() - armSensor.red()) > 30) && (( armSensor.blue() - armSensor.green()) >30))
+                            this.leftMotor.setPower(.1);
+                            this.rightMotor.setPower(.15);
+                            telemetry.update();
+
+                        }
+
+                        if (armPos == 0.75){
+
+                            this.leftMotor.setPower(.1);
+                            this.rightMotor.setPower(.1);
+                            telemetry.update();
+
+                        }
+
+                        if (armPos < 0.75){
+
+                            this.leftMotor.setPower(.15);
+                            this.rightMotor.setPower(.1);
+                            telemetry.update();
+
+                        }
+
+                    }//if ((armSensor.blue() > armSensor.green()) && (armSensor.blue() > armSensor.red()))
 
                 }//while (this.armServo.getPosition() < 1)
 
-            }//while (gamepad1.right_trigger > 0)
+            }//while (gamepad1.a)
 
             this.leftMotor.setPower(0);
             this.rightMotor.setPower(0);

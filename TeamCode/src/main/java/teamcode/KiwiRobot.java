@@ -19,7 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import static java.lang.Math.sqrt;
 
 public class KiwiRobot {
-    private final boolean TELEMETRY_ON = true;
+    private final boolean TELEMETRY_ON = false;
 
     private double SQRT_3 = sqrt(3);
     private HardwareMap hardwareMap;

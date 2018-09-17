@@ -30,45 +30,24 @@ public class DriveLibrary {
     //below here goes movement methods, methods i can call that control the movement of the robot
     //for all intents and purposes, all the motors "forward" direction is counter-clockwise
 
-    public void turnCCW(double rightStickX){
-
-        upRightMotorPower = rightStickX;
-        upleftMotorPower = rightStickX;
-        downLeftMotorPower = rightStickX;
-        downRightMotorPower =  rightStickX;
-
-        setSpeed();
-
-    }
-
-    public void turnCW(double rightStickX){
+    public void turn(double rightStickX){
 
         upRightMotorPower = -rightStickX;
         upleftMotorPower = -rightStickX;
         downLeftMotorPower = -rightStickX;
-        downRightMotorPower = -rightStickX;
+        downRightMotorPower =  -rightStickX;
 
         setSpeed();
 
     }
 
-    public void forwardMovement(double leftStickY) { //up and down movement
 
-        upRightMotorPower = leftStickY;
-        upleftMotorPower = -leftStickY;
-        downLeftMotorPower = -leftStickY;
-        downRightMotorPower = leftStickY;
+    public void cartesianMove(double leftStickX, double leftStickY){
 
-        setSpeed();
-
-    }
-
-    public void sidewaysMovement(double leftStickX){ // left and right movement
-
-        upRightMotorPower = leftStickX;
-        upleftMotorPower = leftStickX;
-        downLeftMotorPower = -leftStickX;
-        downRightMotorPower = -leftStickX;
+        upleftMotorPower = ((-leftStickY / 2) - (leftStickX / 2));
+        downLeftMotorPower = ((-leftStickY / 2) + (leftStickX / 2));
+        upRightMotorPower = ((leftStickY / 2) - (leftStickX / 2));
+        downRightMotorPower = ((leftStickY / 2) + (leftStickX / 2));
 
         setSpeed();
 
@@ -80,6 +59,15 @@ public class DriveLibrary {
         this.upLeftMotor.setPower(upleftMotorPower);
         this.downLeftMotor.setPower(downLeftMotorPower);
         this.downRightMotor.setPower(downRightMotorPower);
+
+    }
+
+    public void stop(){// stops the robot from moving
+
+        this.upRightMotor.setPower(0);
+        this.upLeftMotor.setPower(0);
+        this.downLeftMotor.setPower(0);
+        this.downRightMotor.setPower(0);
 
     }
 }

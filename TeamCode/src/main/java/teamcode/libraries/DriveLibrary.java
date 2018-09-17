@@ -1,30 +1,85 @@
 package teamcode.libraries;
 
-
-import java.lang.reflect.Array;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 public class DriveLibrary {
 
-    public double upRightMotorPower;
-    public double upleftMotorPower;
-    public double downLeftMotorPower;
-    public double downRightMotorPower;
+    private double upRightMotorPower;
+    private double upleftMotorPower;
+    private double downLeftMotorPower;
+    private double downRightMotorPower;
 
-    public double[] motorPowers = new double[4];
+    private DcMotor upRightMotor;
+    private DcMotor upLeftMotor;
+    private DcMotor downLeftMotor;
+    private DcMotor downRightMotor;
 
-    public Array forwardMovement(double leftStickY){
+    public DriveLibrary(DcMotor upRightMotor, DcMotor upLeftMotor, DcMotor downLeftMotor, DcMotor downRightMotor){
+
+        // this 'constructor' gives me direct control of the motors in my library class
+
+        this.upRightMotor = upRightMotor;
+        this.upLeftMotor = upLeftMotor;
+        this.downLeftMotor = downLeftMotor;
+        this.downRightMotor = downRightMotor;
+
+    }
+
+
+    //below here goes movement methods, methods i can call that control the movement of the robot
+    //for all intents and purposes, all the motors "forward" direction is counter-clockwise
+
+    public void turnCCW(double rightStickX){
+
+        upRightMotorPower = rightStickX;
+        upleftMotorPower = rightStickX;
+        downLeftMotorPower = rightStickX;
+        downRightMotorPower =  rightStickX;
+
+        setSpeed();
+
+    }
+
+    public void turnCW(double rightStickX){
+
+        upRightMotorPower = -rightStickX;
+        upleftMotorPower = -rightStickX;
+        downLeftMotorPower = -rightStickX;
+        downRightMotorPower = -rightStickX;
+
+        setSpeed();
+
+    }
+
+    public void forwardMovement(double leftStickY) { //up and down movement
 
         upRightMotorPower = leftStickY;
         upleftMotorPower = -leftStickY;
         downLeftMotorPower = -leftStickY;
         downRightMotorPower = leftStickY;
 
-        motorPowers[0] = upRightMotorPower;
-        motorPowers[1] = upleftMotorPower;
-        motorPowers[2] = downLeftMotorPower;
-        motorPowers[0] = downRightMotorPower;
+        setSpeed();
 
-        return motorPowers;
+    }
+
+    public void sidewaysMovement(double leftStickX){ // left and right movement
+
+        upRightMotorPower = leftStickX;
+        upleftMotorPower = leftStickX;
+        downLeftMotorPower = -leftStickX;
+        downRightMotorPower = -leftStickX;
+
+        setSpeed();
+
+    }
+
+    public void setSpeed(){ //sets the motor powers, must be called in each movement method
+
+        this.upRightMotor.setPower(upRightMotorPower);
+        this.upLeftMotor.setPower(upleftMotorPower);
+        this.downLeftMotor.setPower(downLeftMotorPower);
+        this.downRightMotor.setPower(downRightMotorPower);
+
     }
 }

@@ -46,6 +46,7 @@ public class DriveLibrary {
 
     public void cartesianMove(double leftStickX, double leftStickY){
 
+
         upleftMotorPower = ((-leftStickY / 2) - (leftStickX / 2));
         downLeftMotorPower = ((-leftStickY / 2) + (leftStickX / 2));
         upRightMotorPower = ((leftStickY / 2) - (leftStickX / 2));
@@ -72,7 +73,6 @@ public class DriveLibrary {
 
     }
 
-<<<<<<< HEAD
     public void setDirection(String upRightMotor, String upLeftMotor, String downLeftMotor, String downRightMotor){
 
         if(upRightMotor == "CCW"){
@@ -164,43 +164,43 @@ public class DriveLibrary {
 
     }
 
-    public void setWheelDirections(){
+    public void setWheelDirections() {
 
         // this method will make some motor powers negative if they need to be based on direction
         //there are four directions, right left up and down, and they end on the 45's
 
-        if(theta >= 315 || theta <= 45){//right
+        if (theta >= 315 || theta <= 45) {//right
 
             setDirection("CW", "CW", "CCW", "CCW");
 
         }
 
-        if(theta >= 45 & theta <= 135){//up
+        if (theta >= 45 & theta <= 135) {//up
 
             setDirection("CCW", "CW", "CW", "CCW");
 
         }
 
-        if(theta >= 135 & theta <= 225){//left
+        if (theta >= 135 & theta <= 225) {//left
 
             setDirection("CCW", "CCW", "CW", "CW");
 
         }
 
-        if(theta >= 225 & theta <= 315){//down
+        if (theta >= 225 & theta <= 315) {//down
 
             setDirection("CW", "CCW", "CCW", "CW");
 
         }
+    }
 
-=======
     public void stop(){// stops the robot from moving
 
         this.upRightMotor.setPower(0);
         this.upLeftMotor.setPower(0);
         this.downLeftMotor.setPower(0);
         this.downRightMotor.setPower(0);
->>>>>>> 13f5a86231b685aea8cb35c7e33610b4b8b223ba
+
 
     }
 }

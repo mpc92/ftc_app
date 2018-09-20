@@ -2,16 +2,12 @@ package teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import teamcode.libraries.DriveLibrary;
-import teamcode.libraries.IntakeLibrary;
 
 
 @TeleOp(name = "Intake Test", group = "Linear Opmode")
@@ -23,7 +19,6 @@ public class IntakeTest extends LinearOpMode{
     private DcMotor leftMotor;
     private DcMotor rightMotor;
 
-    private IntakeLibrary IntakeLibrary = new IntakeLibrary(leftMotor, rightMotor);
 
     @Override
     public void runOpMode(){

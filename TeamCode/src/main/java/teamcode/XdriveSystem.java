@@ -52,6 +52,12 @@ put variables above here, but in the class still
         this.downLeftMotor = hardwareMap.get(DcMotor.class, "Down Left Motor");
         this.downRightMotor = hardwareMap.get(DcMotor.class, "Down Right Motor");
 
+        telemetry.addData("Up Left Motor Power", this.upLeftMotor.getPower());
+        telemetry.addData("Up Right Motor Power", this.upRightMotor.getPower());
+        telemetry.addData("Down Left Motor Power", this.downLeftMotor.getPower());
+        telemetry.addData("Down Right Motor Power", this.downRightMotor.getPower());
+        telemetry.addData("Control Mode", controlMode);
+
         /*
         setup stuff goes here
          */
@@ -59,11 +65,24 @@ put variables above here, but in the class still
 
         while (opModeIsActive()) {
 
-            telemetry.addData("Up Left Motor Power", this.upLeftMotor.getPower());
-            telemetry.addData("Up Right Motor Power", this.upRightMotor.getPower());
-            telemetry.addData("Down Left Motor Power", this.downLeftMotor.getPower());
-            telemetry.addData("Down Right Motor Power", this.downRightMotor.getPower());
-            telemetry.addData("Control Mode", controlMode);
+            if(gamepad1.dpad_up
+                    ){
+
+                controlMode =1;
+
+            }
+
+            if(gamepad1.dpad_left){
+
+                controlMode = 2;
+
+            }
+
+            if(gamepad1.dpad_right){
+
+                controlMode = 3;
+
+            }
 
             telemetry.update();
 
@@ -71,25 +90,10 @@ put variables above here, but in the class still
             leftStickX =  - gamepad1.left_stick_x;
             rightStickX = - gamepad1.right_stick_x;
 
-            telemetry.addData("Debug", "1");
-            telemetry.update();
+
+
 
             if (controlMode == 1){
-
-                if(gamepad1.left_bumper){
-
-                    controlMode = 3;
-                    telemetry.update();
-
-                }
-
-                if(gamepad1.right_bumper){
-
-                    controlMode = 2;
-                    telemetry.update();
-
-                }
-
 
                 speed1Movement();
                 setMotorSpeeds();
@@ -107,20 +111,6 @@ put variables above here, but in the class still
 
             if (controlMode == 2){
 
-                if(gamepad1.left_bumper){
-
-                    controlMode = 1;
-                    telemetry.update();
-
-                }
-
-                if(gamepad1.right_bumper){
-
-                    controlMode = 3;
-                    telemetry.update();
-
-                }
-
                 speed2Movement();
                 setMotorSpeeds();
 
@@ -134,21 +124,9 @@ put variables above here, but in the class still
 
             if (controlMode == 3){
 
-                if(gamepad1.left_bumper){
-
-                    controlMode = 2;
-                    telemetry.update();
-
-                }
-
-                if(gamepad1.right_bumper){
-
-                    controlMode = 1;
-                    telemetry.update();
-
-                }
 
                 speed3Movement();
+                setMotorSpeeds();
 
                 /*
                 tenth speed movement

@@ -152,6 +152,8 @@ put variables above here, but in the class still
 
     public void setMotorSpeeds(){
 
+        //this method just sets the motor powers to the variables i told them to be at
+
         this.upRightMotor.setPower(upRightMotorPower);
         this.upLeftMotor.setPower(upleftMotorPower);
         this.downLeftMotor.setPower(downLeftMotorPower);

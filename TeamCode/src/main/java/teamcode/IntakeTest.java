@@ -34,7 +34,7 @@ public class IntakeTest extends LinearOpMode{
 
         while (opModeIsActive()){
 
-            this.leftMotor.setPower(gamepad1.right_trigger);
+            this.leftMotor.setPower( - gamepad1.right_trigger);
             this.rightMotor.setPower(gamepad1.right_trigger);
             telemetry.update();
 

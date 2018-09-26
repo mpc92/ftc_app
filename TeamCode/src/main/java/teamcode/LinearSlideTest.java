@@ -1,8 +1,10 @@
 package teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+@TeleOp(name="LinearSlideTest", group="Linear Opmode")
 public class LinearSlideTest extends LinearOpMode {
     private DcMotor motor1;
 

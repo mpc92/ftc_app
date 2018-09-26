@@ -20,9 +20,9 @@ public class ArmControlTest extends LinearOpMode {
         }
     }
     public void initialize() {
-        armbasemotor = hardwareMap.get(DcMotor.class, "motor1");
-        armServo = hardwareMap.get(Servo.class, "armServo");
-        motor1.setDirection(DcMotor.Direction.FORWARD);
+        //armbasemotor = hardwareMap.get(DcMotor.class, "motor1");
+        //armServo = hardwareMap.get(Servo.class, "armServo");
+        //motor1.setDirection(DcMotor.Direction.FORWARD);
         armServoBase.setDirection(Servo.Direction.FORWARD);
         armServoTop.setDirection(Servo.Direction.FORWARD);
         clawServo.setDirection(Servo.Direction.FORWARD);

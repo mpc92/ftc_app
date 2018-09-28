@@ -65,8 +65,7 @@ put variables above here, but in the class still
 
         while (opModeIsActive()) {
 
-            if(gamepad1.dpad_up
-                    ){
+            if(gamepad1.dpad_up){
 
                 controlMode =1;
 

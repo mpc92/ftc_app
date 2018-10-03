@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 
-@Autonomous(name="Pushbot: Auto Drive By Encoder", group="Auto Modes")
+@Autonomous(name="Auto Test", group="Auto Modes")
 
 
 public class AutoTest extends LinearOpMode {
@@ -39,39 +39,47 @@ public class AutoTest extends LinearOpMode {
         this.upLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         this.upRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
         waitForStart();
+
+        //COMMAND LINE BELOW HERE
+
+        move(1500);
+        turn(0, 1500);
+        move(1500);
 
 
 
     }
 
 
-    public void move(double direction, double distance){
+    public void move(int distance){
 
-        /*
-        direction 0 is up
-        1 is left
-        2 is down
-        3 is left
-         */
+        this.upLeftMotor.setTargetPosition(-distance);
+        this.upRightMotor.setTargetPosition(distance);
+        this.downRightMotor.setTargetPosition(distance);
+        this.downLeftMotor.setTargetPosition(-distance);
 
+    }
 
-        if (direction == 0){
+    public void turn(int direction, int distance){
 
+        if(direction == 0){// left
 
+            this.upRightMotor.setTargetPosition(distance);
+            this.upLeftMotor.setTargetPosition(distance);
+            this.downLeftMotor.setTargetPosition(distance);
+            this.downRightMotor.setTargetPosition(distance);
 
         }
 
+        if(direction == 1){// right
 
+            this.upRightMotor.setTargetPosition(-distance);
+            this.upLeftMotor.setTargetPosition(-distance);
+            this.downLeftMotor.setTargetPosition(-distance);
+            this.downRightMotor.setTargetPosition(-distance);
 
+        }
 
-    }
-
-    public int inchesToEncoderSteps(double distance){
-
-
-
-        return
     }
 }
